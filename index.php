@@ -21,6 +21,7 @@
  * @copyright 2025 Vinod Kumar Aleti <vinod.aleti@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require_once(__DIR__ . '/../../../config.php');
 $url = new moodle_url('/admin/tool/vinod404/index.php');
 require_login();
