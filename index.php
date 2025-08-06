@@ -23,6 +23,7 @@
  */
 require_once(__DIR__ . '/../../../config.php');
 $url = new moodle_url('/admin/tool/vinod404/index.php');
+require_login();
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
