@@ -18,7 +18,7 @@
  * Basic information displayed on the plugin's index page.
  *
  * @package   tool_vinod404
- * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
+ * @copyright 2025 Vinod Kumar Aleti <vinod.aleti@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(__DIR__ . '/../../../config.php');
