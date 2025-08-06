@@ -16,7 +16,7 @@
 
 /**
  * Version file for plugin vinod404
- * 
+ *
  * @package   tool_vinod404
  * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
