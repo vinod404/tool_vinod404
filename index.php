@@ -23,7 +23,7 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
-$id = optional_param('id', 0, PARAM_INT);
+$id = required_param('id', PARAM_INT);
 require_login();
 $url = new \moodle_url('/admin/tool/vinod404/index.php', ['id' => $id]);
 $PAGE->set_context(context_system::instance());

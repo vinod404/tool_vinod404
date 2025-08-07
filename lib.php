@@ -15,17 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version file for plugin vinod404
+ * Callback implementations for tool_vinod404
  *
  * @package   tool_vinod404
  * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 2025080701;
-$plugin->requires = 2025041401; // Moodle 5.0.
-$plugin->component = 'tool_vinod404';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.3';
+function tool_vinod404_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
+    $url = new moodle_url('/admin/tool/vinod404/index.php', ['id' => $course->id]);
+    $parentnode->add(
+        get_string('pluginname', 'tool_vinod404'),
+        $url,
+        navigation_node::TYPE_SETTING,
+        null,
+        null,
+        new pix_icon('icon', '', 'tool_vinod404')
+    );
+}
