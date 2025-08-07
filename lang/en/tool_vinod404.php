@@ -25,6 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['courseid'] = 'Course ID: {$a}';
+$string['coursename'] = 'Course Name: {$a}';
 $string['helloworld'] = 'Hello, World!';
 $string['pluginname'] = 'My first Moodle plugin';
 $string['vinod404'] = 'Vinod Learning Plugin';
