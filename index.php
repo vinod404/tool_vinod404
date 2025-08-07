@@ -25,33 +25,15 @@
 require_once(__DIR__ . '/../../../config.php');
 $id = optional_param('id', 0, PARAM_INT);
 require_login();
-$url = new \moodle_url('/admin/tool/vinod404/index.php', 'id' => $id);
+$url = new \moodle_url('/admin/tool/vinod404/index.php', ['id' => $id]);
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('vinod404', 'tool_vinod404'));
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 echo $OUTPUT->header();
-$userinput1 = 'no <b>tags</b> allowed in strings';
-$userinput2 = '<span class="multilang" lang="en">RIGHT</span><span class="multilang" lang="fr">WRONG</span>';
-$userinput3 = 'a" onmouseover=”alert(\'XSS\')" asdf="';
-$userinput4 = "3>2";
-$userinput5 = "2<3"; // Interesting effect, huh?
-
-echo html_writer::div(s($userinput1)); // Used when you want to escape the value.
-echo html_writer::div(s($userinput2));
-echo html_writer::div(s($userinput3));
-echo html_writer::div(s($userinput4));
-echo html_writer::div(s($userinput5));
-echo html_writer::div(format_string($userinput1)); // Used for one-line strings, such as forum post subject.
-echo html_writer::div(format_string($userinput2));
-echo html_writer::div(format_string($userinput3));
-echo html_writer::div(format_string($userinput4));
-echo html_writer::div(format_string($userinput5));
-echo html_writer::div(format_text($userinput1)); // Used for multil-line rich-text contents such as forum post body.
-echo html_writer::div(format_text($userinput2));
-echo html_writer::div(format_text($userinput3));
-echo html_writer::div(format_text($userinput4));
-echo html_writer::div(format_text($userinput5));
-echo html_writer::tag('p', get_string('helloworld', 'tool_vinod404'));
+echo html_writer::tag('h2', get_string('helloworld', 'tool_vinod404'));
+echo html_writer::start_tag('div', ['class' => 'courseid']);
+echo html_writer::tag('span', get_string('courseid', 'tool_vinod404', $id));
+echo html_writer::end_tag('div');
 echo $OUTPUT->footer();
