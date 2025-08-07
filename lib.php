@@ -22,14 +22,21 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * This function adds a link to the plugin in the course navigation menu.
+ * @param navigation_node $parentnode
+ * @param stdClass $course
+ * @param context_course $context
+ * @return void
+ */
 function tool_vinod404_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
     $url = new moodle_url('/admin/tool/vinod404/index.php', ['id' => $course->id]);
     $parentnode->add(
         get_string('pluginname', 'tool_vinod404'),
         $url,
         navigation_node::TYPE_SETTING,
-        null,
-        null,
+        get_string('pluginname', 'tool_vinod404'),
+        'vinod404',
         new pix_icon('icon', '', 'tool_vinod404')
     );
 }
