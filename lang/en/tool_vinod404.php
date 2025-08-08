@@ -24,15 +24,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['addform'] = 'Add';
 $string['completed'] = 'Completed';
 $string['courseid'] = 'Course ID';
 $string['coursename'] = 'Course Name: {$a}';
+$string['created'] = 'Created successfully';
+$string['editform'] = 'Edit';
+$string['formheader'] = 'Form Header';
 $string['helloworld'] = 'Hello, World!';
 $string['name'] = 'Name';
+$string['nameduplicate'] = 'Name already exists. Please enter a different name.';
 $string['pluginname'] = 'Vinod Learning plugin';
 $string['priority'] = 'Priority';
 $string['timecreated'] = 'Time Created';
 $string['timemodified'] = 'Time Modified';
+$string['updated'] = 'Updated successfully';
+$string['vinod404'] = 'Vinod Learning Plugin';
 $string['vinod404:edit'] = 'Edit Vinod Learning Plugin';
 $string['vinod404:view'] = 'View Vinod Learning Plugin';
-$string['vinod404'] = 'Vinod Learning Plugin';

@@ -34,7 +34,7 @@ class tool_vinod404_table extends table_sql {
      */
     public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
-        $this->define_columns(['name', 'courseid', 'completed', 'priority', 'timecreated', 'timemodified']);
+        $this->define_columns(['name', 'courseid', 'completed', 'priority', 'timecreated', 'timemodified', 'action']);
         $this->define_headers([
             get_string('name', 'tool_vinod404'),
             get_string('courseid', 'tool_vinod404'),
@@ -42,6 +42,7 @@ class tool_vinod404_table extends table_sql {
             get_string('priority', 'tool_vinod404'),
             get_string('timecreated', 'tool_vinod404'),
             get_string('timemodified', 'tool_vinod404'),
+            get_string('action'),
         ]);
         $this->set_sql(
             'id, name, courseid, completed, priority, timecreated, timemodified',
@@ -98,5 +99,14 @@ class tool_vinod404_table extends table_sql {
      */
     protected function col_timemodified($line) {
         return userdate($line->timemodified);
+    }
+    /**
+     * Summary of col_action
+     * @param mixed $line
+     * @return string
+     */
+    protected function col_action($line) {
+        $url = new moodle_url('/admin/tool/vinod404/edit.php', ['id' => $line->id, 'courseid' => $line->courseid]);
+        return html_writer::link($url, get_string('edit'), ['class' => 'btn btn-secondary']);
     }
 }

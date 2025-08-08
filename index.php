@@ -23,9 +23,9 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
-$id = required_param('id', PARAM_INT);
-$url = new \moodle_url('/admin/tool/vinod404/index.php', ['id' => $id]);
-$course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
+$courseid = required_param('courseid', PARAM_INT);
+$url = new \moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
+$course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 require_course_login($course);
 
 $context = context_course::instance($course->id);
@@ -37,9 +37,13 @@ $PAGE->set_pagelayout('incourse');
 $PAGE->set_title(get_string('vinod404', 'tool_vinod404'));
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 $PAGE->navbar->add(get_string('pluginname', 'tool_vinod404'), $url);
-echo $OUTPUT->header();
 
-$table = new \tool_vinod404_table('vinod404table', $id);
+$table = new \tool_vinod404_table('vinod404table', $courseid);
 $table->define_baseurl($url);
+
+$addurl = new moodle_url('/admin/tool/vinod404/edit.php', ['courseid' => $courseid]);
+$addlink = html_writer::link($addurl, get_string('addform', 'tool_vinod404'), []);
+echo $OUTPUT->header();
+echo $addlink;
 $table->out(10, true);
 echo $OUTPUT->footer();
