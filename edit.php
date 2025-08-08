@@ -56,11 +56,12 @@ if ($form->is_cancelled()) {
     redirect($returnurl);
 } else if ($data = $form->get_data()) {
     // If the form is submitted, process the data.
+    $data->timemodified = time();
     if ($data->id > 0) {
-        $data->timemodified = time();
         $DB->update_record('tool_vinod404', $data);
         redirect($returnurl, get_string('updated', 'tool_vinod404'));
     } else {
+        $data->timecreated = time();
         $DB->insert_record('tool_vinod404', $data);
         redirect($returnurl, get_string('created', 'tool_vinod404'));
     }

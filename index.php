@@ -24,6 +24,9 @@
 
 require_once(__DIR__ . '/../../../config.php');
 $courseid = required_param('courseid', PARAM_INT);
+$delete = optional_param('delete',0, PARAM_INT);
+$sesskey = optional_param('sesskey', '', PARAM_ALPHANUMEXT);
+
 $url = new \moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 require_course_login($course);
@@ -37,6 +40,23 @@ $PAGE->set_pagelayout('incourse');
 $PAGE->set_title(get_string('vinod404', 'tool_vinod404'));
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 $PAGE->navbar->add(get_string('pluginname', 'tool_vinod404'), $url);
+
+if ($delete) {
+    require_capability('tool/vinod404:edit', $context);
+    if ($sesskey && confirm_sesskey()) {
+        $DB->delete_records('tool_vinod404', ['id' => $delete]);
+        redirect($url, get_string('deleted', 'tool_vinod404'));
+    }
+    echo $OUTPUT->header();
+    echo $OUTPUT->heading(get_string('delete', 'tool_vinod404'));
+    echo $OUTPUT->confirm(get_string('deleteconfirm', 'tool_vinod404'),
+    new moodle_url('/admin/tool/vinod404/index.php',
+    ['courseid' => $courseid, 'delete' => $delete, 'sesskey' => sesskey()]),
+    new moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]));
+
+    echo $OUTPUT->footer();
+    exit;
+}
 
 $table = new \tool_vinod404_table('vinod404table', $courseid);
 $table->define_baseurl($url);

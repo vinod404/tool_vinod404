@@ -33,7 +33,7 @@ class tool_vinod404_form extends \moodleform {
         $mform = $this->_form;
         $mform->addElement("header", "header", get_string("formheader", 'tool_vinod404'));
         $mform->addElement('text', 'name', get_string('name', 'tool_vinod404'));
-        $mform->setType('name', PARAM_ALPHANUM);
+        $mform->setType('name', PARAM_NOTAGS);
 
         $mform->addElement('advcheckbox', 'completed', get_string('completed', 'tool_vinod404'));
 
