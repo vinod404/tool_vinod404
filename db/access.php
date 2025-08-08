@@ -27,7 +27,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// @var mixed $capabilities.
+// Mixed $capabilities.
 $capabilities = [
     'tool/vinod404:view' => [
         'riskbitmask' => RISK_SPAM,
