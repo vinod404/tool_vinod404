@@ -24,12 +24,13 @@
 
 require_once(__DIR__ . '/../../../config.php');
 $id = required_param('id', PARAM_INT);
-require_login();
 $url = new \moodle_url('/admin/tool/vinod404/index.php', ['id' => $id]);
 $course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 require_course_login($course);
 
 $context = context_course::instance($course->id);
+require_capability('tool/vinod404:view', $context);
+
 $PAGE->set_context($context);
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('incourse');

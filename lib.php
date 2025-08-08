@@ -30,13 +30,15 @@
  * @return void
  */
 function tool_vinod404_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
-    $url = new moodle_url('/admin/tool/vinod404/index.php', ['id' => $course->id]);
-    $parentnode->add(
-        get_string('pluginname', 'tool_vinod404'),
-        $url,
-        navigation_node::TYPE_SETTING,
-        get_string('pluginname', 'tool_vinod404'),
-        'vinod404',
-        new pix_icon('icon', '', 'tool_vinod404')
-    );
+    if (has_capability('tool/vinod404:view', $context)) {
+        $url = new moodle_url('/admin/tool/vinod404/index.php', ['id' => $course->id]);
+        $parentnode->add(
+            get_string('pluginname', 'tool_vinod404'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            get_string('pluginname', 'tool_vinod404'),
+            'vinod404',
+            new pix_icon('icon', '', 'tool_vinod404')
+        );
+    }
 }
