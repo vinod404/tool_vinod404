@@ -28,11 +28,10 @@ class tool_vinod404_form extends \moodleform {
 
     /**
      * Form definition
-     */    
+     */
     public function definition() {
         $mform = $this->_form;
         $mform->addElement("header", "header", get_string("formheader", 'tool_vinod404'));
-        
         $mform->addElement('text', 'name', get_string('name', 'tool_vinod404'));
         $mform->setType('name', PARAM_ALPHANUM);
 
@@ -62,7 +61,7 @@ class tool_vinod404_form extends \moodleform {
 
         $exist = $DB->record_exists_select('tool_vinod404',
         'name = :name AND courseid = :courseid AND id != :id',
-        array('name'=> $data['name'], 'courseid' => $data['courseid'], 'id' => $data['id']));
+        array('name' => $data['name'], 'courseid' => $data['courseid'], 'id' => $data['id']));
         if ($exist) {
             $errors['name'] = get_string('nameduplicate', 'tool_vinod404');
         }
