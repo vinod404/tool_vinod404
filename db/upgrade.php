@@ -17,13 +17,14 @@
 /**
  * Upgrade code for install
  *
- * @package   tool_vinod404     
- * @copyright 2025 Vniod Kumar Aleti <vinod.aleti@moodle.com>
+ * @package   tool_vinod404
+ * @copyright 2025 Vinod Kumar Aleti <vinod.aleti@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Upgrade the user tours plugin.
+ * Upgrade the vinod404 plugin.
+ * @param int $oldversion The version we are upgrading from
  */
 function xmldb_tool_vinod404_upgrade($oldversion) {
     global $DB;
