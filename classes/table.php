@@ -34,7 +34,7 @@ class tool_vinod404_table extends table_sql {
      * @param mixed $uniqueid
      * @param mixed $courseid
      */
-    function __construct($uniqueid, $courseid) {
+    public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
         $this->define_columns(['name', 'courseid', 'completed', 'priority', 'timecreated', 'timemodified']);
         $this->define_headers([
@@ -43,20 +43,19 @@ class tool_vinod404_table extends table_sql {
             get_string('completed', 'tool_vinod404'),
             get_string('priority', 'tool_vinod404'),
             get_string('timecreated', 'tool_vinod404'),
-            get_string('timemodified', 'tool_vinod404')
+            get_string('timemodified', 'tool_vinod404'),
         ]);
         $this->set_sql(
             'id, name, courseid, completed, priority, timecreated, timemodified',
             '{tool_vinod404}',
             'courseid = :courseid',
-            ['courseid' => $courseid]
+            ['courseid' => $courseid],
         );
 
         $this->sortable(false);
         $this->collapsible(true);
         $this->is_downloadable(false);
         $this->pageable(true);
-        // Additional initialization code can go here
     }
 
     /**
@@ -81,7 +80,7 @@ class tool_vinod404_table extends table_sql {
      * Summary of col_name
      * @param mixed $line
      * @return string
-     */    
+     */
     protected function col_name($line) {
         return format_string($line->name);
     }
@@ -89,7 +88,7 @@ class tool_vinod404_table extends table_sql {
      * Summary of col_timecreated
      * @param mixed $line
      * @return string
-     */    
+     */
     protected function col_timecreated($line) {
         return userdate($line->timecreated);
     }
@@ -102,5 +101,4 @@ class tool_vinod404_table extends table_sql {
     protected function col_timemodified($line) {
         return userdate($line->timemodified);
     }
-    // Table definition and methods go here
 }
