@@ -24,8 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['courseid'] = 'Course ID: {$a}';
+$string['completed'] = 'Completed';
+$string['courseid'] = 'Course ID';
 $string['coursename'] = 'Course Name: {$a}';
 $string['helloworld'] = 'Hello, World!';
+$string['name'] = 'Name';
 $string['pluginname'] = 'My first Moodle plugin';
+$string['priority'] = 'Priority';
+$string['timecreated'] = 'Time Created';
+$string['timemodified'] = 'Time Modified';
 $string['vinod404'] = 'Vinod Learning Plugin';

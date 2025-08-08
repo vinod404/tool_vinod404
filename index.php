@@ -37,9 +37,8 @@ $PAGE->set_title(get_string('vinod404', 'tool_vinod404'));
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 $PAGE->navbar->add(get_string('pluginname', 'tool_vinod404'), $url);
 echo $OUTPUT->header();
-echo html_writer::tag('h2', get_string('helloworld', 'tool_vinod404'));
-echo html_writer::start_tag('div', ['class' => 'courseid']);
-echo html_writer::tag('span', get_string('courseid', 'tool_vinod404', $id));
-echo html_writer::end_tag('div');
-echo html_writer::tag('p', get_string('coursename', 'tool_vinod404', $course->fullname));
+
+$table = new \tool_vinod404_table('vinod404table', $id);
+$table->define_baseurl($url);
+$table->out(10, true);
 echo $OUTPUT->footer();
