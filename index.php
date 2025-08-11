@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_vinod404;
 require_once(__DIR__ . '/../../../config.php');
 $courseid = required_param('courseid', PARAM_INT);
 $delete = optional_param('delete', 0, PARAM_INT);
@@ -44,7 +45,8 @@ $PAGE->navbar->add(get_string('pluginname', 'tool_vinod404'), $url);
 if ($delete) {
     require_capability('tool/vinod404:edit', $context);
     if ($sesskey && confirm_sesskey()) {
-        $DB->delete_records('tool_vinod404', ['id' => $delete]);
+        $record = new tool_vinod404\vinod404();
+        $record->delete_entry($delete);
         redirect($url, get_string('deleted', 'tool_vinod404'));
     }
     echo $OUTPUT->header();

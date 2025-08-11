@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_vinod404;
 require('../../../config.php');
 global $DB;
 $id = optional_param('id', 0, PARAM_INT);
@@ -58,12 +59,14 @@ if ($form->is_cancelled()) {
     // If the form is submitted, process the data.
     $data->timemodified = time();
     if ($data->id > 0) {
-        $DB->update_record('tool_vinod404', $data);
+        $record = new tool_vinod404\vinod404();
+        $record->update_entry($data);
         redirect($returnurl, get_string('updated', 'tool_vinod404'));
     } else {
-        $data->timecreated = time();
-        $DB->insert_record('tool_vinod404', $data);
-        redirect($returnurl, get_string('created', 'tool_vinod404'));
+        $record = new tool_vinod404\vinod404();
+        if ($record->add_entry($data)) {
+            redirect($returnurl, get_string('created', 'tool_vinod404'));
+        }
     }
 }
 echo $OUTPUT->header();
