@@ -28,18 +28,18 @@ class vinod404 {
      * table
      * @var string
      */
-    protected $table = 'tool_vinod404';
+    protected static $table = 'tool_vinod404';
 
     /**
      * add_entry in the table
      * @param mixed $dataobject
      * @return int of a new entry
      */
-    public function add_entry($dataobject) {
+    public static function add_entry($dataobject) {
         global $DB;
         $dataobject->timecreated = time();
         $dataobject->timemodified = time();
-        return $DB->insert_record($this->table, $dataobject);
+        return $DB->insert_record(self::$table, $dataobject);
     }
 
     /**
@@ -47,20 +47,20 @@ class vinod404 {
      * @param mixed $dataobject
      * @return bool
      */
-    public function update_entry($dataobject) {
+    public static function update_entry($dataobject) {
         global $DB;
         $dataobject->timemodified = time();
-        return $DB->update_record($this->table, $dataobject);
+        return $DB->update_record(self::$table, $dataobject);
     }
-    
+
     /**
      * delete_entry
      * @param int $id
      * @return bool
      */
-    public function delete_entry($id) {
+    public static function delete_entry($id) {
         global $DB;
-        return $DB->delete_records($this->table, ['id' => $id]);
+        return $DB->delete_records(self::$table, ['id' => $id]);
     }
 
     /**
@@ -68,8 +68,8 @@ class vinod404 {
      * @param int $id
      * @return \stdClass
      */
-    public function get_entry($id) {
+    public static function get_entry($id) {
         global $DB;
-        return $DB->get_record($this->table, ['id' => $id]);
+        return $DB->get_record(self::$table, ['id' => $id]);
     }
 }

@@ -60,11 +60,11 @@ if ($form->is_cancelled()) {
     $data->timemodified = time();
     if ($data->id > 0) {
         $record = new tool_vinod404\vinod404();
-        $record->update_entry($data);
+        $record::update_entry($data);
         redirect($returnurl, get_string('updated', 'tool_vinod404'));
     } else {
         $record = new tool_vinod404\vinod404();
-        if ($record->add_entry($data)) {
+        if ($record::add_entry($data)) {
             redirect($returnurl, get_string('created', 'tool_vinod404'));
         }
     }

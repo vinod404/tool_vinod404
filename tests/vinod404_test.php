@@ -28,8 +28,8 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * tests the add and get entries
-     * @covers add_entry method \tool_vinod404\vinod404()->add_entry()
-     * @covers get_entry method \tool_vinod404\vinod404()->get_entry()
+     * @covers add_entry method \tool_vinod404\vinod404::add_entry()
+     * @covers get_entry method \tool_vinod404\vinod404::get_entry()
      */
     public function test_add_entry() {
         global $DB;
@@ -42,15 +42,15 @@ final class vinod404_test extends \advanced_testcase {
             'courseid' => $course->id,
             'completed' => 0,
         ];
-        $id = $vinod404->add_entry($data);
-        $record = $vinod404->get_entry($id);
+        $id = $vinod404::add_entry($data);
+        $record = $vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
         $this->assertEquals($course->id, $record->courseid);
     }
 
     /**
      * Test updating an entry
-     * @covers update_entry method \tool_vinod404\vinod404()->update_entry()
+     * @covers update_entry method \tool_vinod404\vinod404::update_entry()
      */
     public function test_update_entry() {
         global $DB;
@@ -62,17 +62,17 @@ final class vinod404_test extends \advanced_testcase {
             'courseid' => $course->id,
             'completed' => 0,
         ];
-        $id = $vinod404->add_entry($data);
+        $id = $vinod404::add_entry($data);
         $data->id = $id;
         $data->name = 'Updated Entry';
-        $vinod404->update_entry($data);
-        $record = $vinod404->get_entry($id);
+        $vinod404::update_entry($data);
+        $record = $vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
     }
 
     /**
      * tests the delete entry
-     * @covers delete_entry method \tool_vinod404\vinod404()->delete_entry()
+     * @covers delete_entry method \tool_vinod404\vinod404::delete_entry()
      */
     public function test_delete_entry() {
         global $DB;
@@ -84,11 +84,11 @@ final class vinod404_test extends \advanced_testcase {
             'courseid' => $course->id,
             'completed' => 0,
         ];
-        $id = $vinod404->add_entry($data);
-        $record = $vinod404->get_entry($id);
+        $id = $vinod404::add_entry($data);
+        $record = $vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
-        $vinod404->delete_entry($id);
-        $record = $vinod404->get_entry($id);
+        $vinod404::delete_entry($id);
+        $record = $vinod404::get_entry($id);
         $this->assertFalse($record);
     }
 }

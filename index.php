@@ -46,7 +46,7 @@ if ($delete) {
     require_capability('tool/vinod404:edit', $context);
     if ($sesskey && confirm_sesskey()) {
         $record = new tool_vinod404\vinod404();
-        $record->delete_entry($delete);
+        $record::delete_entry($delete);
         redirect($url, get_string('deleted', 'tool_vinod404'));
     }
     echo $OUTPUT->header();
