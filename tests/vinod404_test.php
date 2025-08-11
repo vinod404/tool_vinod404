@@ -28,8 +28,8 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * tests the add and get entries
-     * @covers add_entry method \tool_vinod404\vinod404::add_entry()
-     * @covers get_entry method \tool_vinod404\vinod404::get_entry()
+     * @covers add_entry method \tool_vinod404\vinod404::add_entry
+     * @covers get_entry method \tool_vinod404\vinod404::get_entry
      */
     public function test_add_entry() {
         global $DB;
@@ -50,7 +50,7 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * Test updating an entry
-     * @covers update_entry method \tool_vinod404\vinod404::update_entry()
+     * @covers update_entry method \tool_vinod404\vinod404::update_entry
      */
     public function test_update_entry() {
         global $DB;
@@ -72,7 +72,7 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * tests the delete entry
-     * @covers delete_entry method \tool_vinod404\vinod404::delete_entry()
+     * @covers delete_entry method \tool_vinod404\vinod404::delete_entry
      */
     public function test_delete_entry() {
         global $DB;
