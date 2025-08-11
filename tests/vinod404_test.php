@@ -28,6 +28,7 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * tests the add and get entries
+     * @covers add_entry and get_entry methods
      * @return void
      */
     public function test_add_entry() {
@@ -39,7 +40,7 @@ final class vinod404_test extends \advanced_testcase {
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
-            'completed' => 0
+            'completed' => 0,
         ];
         $id = $vinod404->add_entry($data);
         $record = $vinod404->get_entry($id);
@@ -49,6 +50,7 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * Test updating an entry
+     * @covers update_entry method
      * @return void
      */
     public function test_update_entry() {
@@ -59,7 +61,7 @@ final class vinod404_test extends \advanced_testcase {
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
-            'completed' => 0
+            'completed' => 0,
         ];
         $id = $vinod404->add_entry($data);
         $data->id = $id;
@@ -71,6 +73,7 @@ final class vinod404_test extends \advanced_testcase {
 
     /**
      * tests the delete entry
+     * @covers delete_entry method
      * @return void
      */
     public function test_delete_entry() {
@@ -81,7 +84,7 @@ final class vinod404_test extends \advanced_testcase {
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
-            'completed' => 0
+            'completed' => 0,
         ];
         $id = $vinod404->add_entry($data);
         $record = $vinod404->get_entry($id);

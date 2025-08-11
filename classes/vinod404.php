@@ -49,7 +49,7 @@ class vinod404 {
      */
     public function update_entry($dataobject) {
         global $DB;
-        $dataobject->timemodified = time();        
+        $dataobject->timemodified = time();
         return $DB->update_record($this->table, $dataobject);
     }
     
