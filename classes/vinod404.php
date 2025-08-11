@@ -23,15 +23,13 @@ namespace tool_vinod404;
  * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace tool_vinod404;
 class vinod404 {
     /**
      * table
      * @var string
      */
     protected $table = 'tool_vinod404';
-    
+
     /**
      * add_entry in the table
      * @param mixed $dataobject
@@ -54,6 +52,7 @@ class vinod404 {
         $dataobject->timemodified = time();        
         return $DB->update_record($this->table, $dataobject);
     }
+    
     /**
      * delete_entry
      * @param int $id

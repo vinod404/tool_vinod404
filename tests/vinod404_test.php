@@ -24,9 +24,6 @@ namespace tool_vinod404;
  * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace tool_vinod404;
-
 final class vinod404_test extends \advanced_testcase {
 
     /**
