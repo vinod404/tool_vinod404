@@ -53,12 +53,12 @@ $PAGE->set_context($context);
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 $form = new tool_vinod404_form(null, ['courseid' => $courseid]);
 
-$editor_options = tool_vinod404\vinod404::editor_options($courseid);
+$editoroptions = tool_vinod404\vinod404::editor_options($courseid);
 
 $record = file_prepare_standard_editor(
     $record,
     'description',
-    $editor_options,
+    $editoroptions,
     $context,
     'tool_vinod404',
     'vinod',

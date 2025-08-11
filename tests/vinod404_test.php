@@ -44,7 +44,7 @@ final class vinod404_test extends \advanced_testcase {
             'description_editor' => [
                 'text' => 'Add Test Description',
                 'format' => FORMAT_HTML,
-                'itemid' => file_get_unused_draft_itemid()
+                'itemid' => file_get_unused_draft_itemid(),
             ],
         ];
         $id = \tool_vinod404\vinod404::add_entry($data);
@@ -71,7 +71,7 @@ final class vinod404_test extends \advanced_testcase {
             'description_editor' => [
                 'text' => 'Add Test Description',
                 'format' => FORMAT_HTML,
-                'itemid' => file_get_unused_draft_itemid()
+                'itemid' => file_get_unused_draft_itemid(),
             ],
         ];
         $id = \tool_vinod404\vinod404::add_entry($data);
@@ -101,7 +101,7 @@ final class vinod404_test extends \advanced_testcase {
             'description_editor' => [
                 'text' => 'Add Test Description',
                 'format' => FORMAT_HTML,
-                'itemid' => file_get_unused_draft_itemid()
+                'itemid' => file_get_unused_draft_itemid(),
             ],
         ];
         $id = \tool_vinod404\vinod404::add_entry($data);

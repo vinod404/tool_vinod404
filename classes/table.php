@@ -34,13 +34,15 @@ class tool_vinod404_table extends table_sql {
      */
     public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
-        $this->define_columns(['name', 'courseid', 'completed', 'priority', 'description', 'timecreated', 'timemodified', 'action']);
+        $this->define_columns([
+            'name', 'courseid', 'completed', 'priority', 'description', 'timecreated', 'timemodified', 'action'
+        ]);
         $this->define_headers([
             get_string('name', 'tool_vinod404'),
             get_string('courseid', 'tool_vinod404'),
             get_string('completed', 'tool_vinod404'),
             get_string('priority', 'tool_vinod404'),
-            get_string('description','tool_vinod404'),
+            get_string('description', 'tool_vinod404'),
             get_string('timecreated', 'tool_vinod404'),
             get_string('timemodified', 'tool_vinod404'),
             get_string('action'),
