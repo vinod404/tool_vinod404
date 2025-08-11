@@ -28,7 +28,7 @@ class renderer extends \plugin_renderer_base {
     /**
      * Render the table for the Vinod Learning plugin.
      *
-     * @param $list a list of entries.
+     * @param \tool_vinod404\output\entries $list a list of entries.
      * @return string The rendered table HTML.
      */
     public function render_entries($list) {
