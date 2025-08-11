@@ -82,7 +82,6 @@ function xmldb_tool_vinod404_upgrade($oldversion) {
         if (!$dbman->field_exists($table, $field1)) {
             $dbman->add_field($table, $field1);
         }
-        
         $field2 = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
         // Conditionally launch add field descriptionformat.
         if (!$dbman->field_exists($table, $field2)) {
