@@ -31,7 +31,7 @@ final class vinod404_test extends \advanced_testcase {
      * @covers \tool_vinod404\vinod404::add_entry
      * @covers \tool_vinod404\vinod404::get_entry
      */
-    public function test_add_entry() {
+    public function test_add_entry(): void {
         global $DB;
 
         $this->resetAfterTest();
@@ -52,7 +52,7 @@ final class vinod404_test extends \advanced_testcase {
      * Test updating an entry
      * @covers \tool_vinod404\vinod404::update_entry
      */
-    public function test_update_entry() {
+    public function test_update_entry(): void {
         global $DB;
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course();
@@ -74,7 +74,7 @@ final class vinod404_test extends \advanced_testcase {
      * tests the delete entry
      * @covers \tool_vinod404\vinod404::delete_entry
      */
-    public function test_delete_entry() {
+    public function test_delete_entry(): void {
         global $DB;
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course();
