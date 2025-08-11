@@ -59,12 +59,8 @@ if ($delete) {
     exit;
 }
 
-$table = new \tool_vinod404_table('vinod404table', $courseid);
-$table->define_baseurl($url);
-
-$addurl = new moodle_url('/admin/tool/vinod404/edit.php', ['courseid' => $courseid]);
-$addlink = html_writer::link($addurl, get_string('addform', 'tool_vinod404'), []);
-echo $OUTPUT->header();
-echo $addlink;
-$table->out(10, true);
-echo $OUTPUT->footer();
+$output = $PAGE->get_renderer('tool_vinod404');
+$outputdata = new \tool_vinod404\output\entries($courseid, $url);
+echo $output->header();
+echo $output->render($outputdata);
+echo $output->footer();

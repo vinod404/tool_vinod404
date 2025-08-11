@@ -34,6 +34,7 @@ $string['deleteconfirm'] = 'Are you sure you want to delete this entry?';
 $string['deleted'] = 'Deleted successfully';
 $string['description'] = 'Description';
 $string['editform'] = 'Edit';
+$string['forcourse'] = 'For course - {$a}';
 $string['formheader'] = 'Form Header';
 $string['helloworld'] = 'Hello, World!';
 $string['name'] = 'Name';
