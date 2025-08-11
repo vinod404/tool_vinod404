@@ -74,6 +74,23 @@ function xmldb_tool_vinod404_upgrade($oldversion) {
         // Vinod404 savepoint reached.
         upgrade_plugin_savepoint(true, 2025080704, 'tool', 'vinod404');
     }
+
+    if ($oldversion < 2025081100.01) {
+        $table = new xmldb_table('tool_vinod404');
+        $field1 = new xmldb_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'priority');
+        // Conditionally launch add field description.
+        if (!$dbman->field_exists($table, $field1)) {
+            $dbman->add_field($table, $field1);
+        }
+        
+        $field2 = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
+        // Conditionally launch add field descriptionformat.
+        if (!$dbman->field_exists($table, $field2)) {
+            $dbman->add_field($table, $field2);
+        }
+        // Vinod404 savepoint reached.
+        upgrade_plugin_savepoint(true, 2025081100.01, 'tool', 'vinod404');
+    }
     return true;
 }
 

@@ -22,13 +22,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use tool_vinod404;
 require('../../../config.php');
+require_once($CFG->dirroot .'/admin/tool/vinod404/lib.php');
 global $DB;
 $id = optional_param('id', 0, PARAM_INT);
 
 if ($id > 0) {
-    $record = $DB->get_record('tool_vinod404', ['id' => $id]);
+    $record = tool_vinod404\vinod404::get_entry($id);
     $title = get_string('editform', 'tool_vinod404');
     $courseid = $record->courseid;
 } else {
@@ -37,6 +37,8 @@ if ($id > 0) {
     $courseid = required_param('courseid', PARAM_INT);
     $title = get_string('addform', 'tool_vinod404');
     $record->courseid = $courseid;
+    $record->descriptionformat = FORMAT_HTML;
+    $record->description = '';
 }
 
 require_course_login($courseid);
@@ -49,7 +51,19 @@ $PAGE->set_url($url);
 $PAGE->set_context($context);
 
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
-$form = new tool_vinod404_form();
+$form = new tool_vinod404_form(null, ['courseid' => $courseid]);
+
+$editor_options = tool_vinod404\vinod404::editor_options($courseid);
+
+$record = file_prepare_standard_editor(
+    $record,
+    'description',
+    $editor_options,
+    $context,
+    'tool_vinod404',
+    'vinod',
+    $record->id
+);
 $form->set_data($record);
 
 $returnurl = new moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
@@ -59,15 +73,14 @@ if ($form->is_cancelled()) {
     // If the form is submitted, process the data.
     $data->timemodified = time();
     if ($data->id > 0) {
-        $record = new tool_vinod404\vinod404();
-        $record::update_entry($data);
-        redirect($returnurl, get_string('updated', 'tool_vinod404'));
+        tool_vinod404\vinod404::update_entry($data);
+        $message = get_string('updated', 'tool_vinod404');
     } else {
-        $record = new tool_vinod404\vinod404();
-        if ($record::add_entry($data)) {
-            redirect($returnurl, get_string('created', 'tool_vinod404'));
-        }
+        $id = tool_vinod404\vinod404::add_entry($data);
+        $message = get_string('created', 'tool_vinod404');
     }
+    redirect($returnurl, $message);
+
 }
 echo $OUTPUT->header();
 echo $OUTPUT->heading($title);

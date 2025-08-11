@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025081100;
-$plugin->requires = 2020061525; // Moodle 5.0.
+$plugin->version = 2025081101;
+$plugin->requires = 2020061525;
 $plugin->component = 'tool_vinod404';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.0';
+$plugin->release = '2.1';

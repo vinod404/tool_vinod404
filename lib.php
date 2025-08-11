@@ -42,3 +42,52 @@ function tool_vinod404_extend_navigation_course(navigation_node $parentnode, std
         );
     }
 }
+
+/**
+ * File serving callback for tool_vinod404.
+ *
+ * @param stdClass $course        course object
+ * @param stdClass $cm            course module object (if any)
+ * @param context  $context       context object
+ * @param string   $filearea      file area name
+ * @param array    $args          extra arguments (itemid, filepath, filename)
+ * @param bool     $forcedownload whether the file should be downloaded or displayed in browser
+ * @param array    $options       additional options
+ * @return bool
+ */
+function tool_vinod404_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []): bool {
+    global $USER;
+
+    // Check context level.
+    if ($context->contextlevel != CONTEXT_COURSE) {
+        return false;
+    }
+
+    // Check capability (adjust this to your needs).
+    if (!has_capability('tool/vinod404:view', $context)) {
+        return false;
+    }
+
+    // Make sure filearea matches your editor's filearea.
+    if ($filearea !== 'vinod') {
+        return false;
+    }
+
+    // Extract arguments.
+    $itemid = array_shift($args);   // Usually the DB record ID.
+    $filepath = array_shift($args); // Should be '/' usually.
+    $filename = array_shift($args);
+
+    // Get file storage.
+    $fs = get_file_storage();
+    $file = $fs->get_file($context->id, 'tool_vinod404', $filearea, $itemid, $filepath, $filename);
+
+    if (!$file || $file->is_directory()) {
+        return false;
+    }
+
+    // Finally, send the file.
+    send_stored_file($file, 0, 0, $forcedownload, $options);
+    return true;
+}
+

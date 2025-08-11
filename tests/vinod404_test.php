@@ -32,20 +32,26 @@ final class vinod404_test extends \advanced_testcase {
      * @covers \tool_vinod404\vinod404::get_entry
      */
     public function test_add_entry(): void {
-        global $DB;
-
         $this->resetAfterTest();
+        // Create a user and log them in.
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
         $course = $this->getDataGenerator()->create_course();
-        $vinod404 = new vinod404();
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
             'completed' => 0,
+            'description_editor' => [
+                'text' => 'Add Test Description',
+                'format' => FORMAT_HTML,
+                'itemid' => file_get_unused_draft_itemid()
+            ],
         ];
-        $id = $vinod404::add_entry($data);
-        $record = $vinod404::get_entry($id);
+        $id = \tool_vinod404\vinod404::add_entry($data);
+        $record = \tool_vinod404\vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
         $this->assertEquals($course->id, $record->courseid);
+        $this->assertEquals($data->description_editor['text'], $record->description);
     }
 
     /**
@@ -53,21 +59,29 @@ final class vinod404_test extends \advanced_testcase {
      * @covers \tool_vinod404\vinod404::update_entry
      */
     public function test_update_entry(): void {
-        global $DB;
         $this->resetAfterTest();
+        // Create a user and log them in.
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
         $course = $this->getDataGenerator()->create_course();
-        $vinod404 = new vinod404();
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
             'completed' => 0,
+            'description_editor' => [
+                'text' => 'Add Test Description',
+                'format' => FORMAT_HTML,
+                'itemid' => file_get_unused_draft_itemid()
+            ],
         ];
-        $id = $vinod404::add_entry($data);
+        $id = \tool_vinod404\vinod404::add_entry($data);
         $data->id = $id;
         $data->name = 'Updated Entry';
-        $vinod404::update_entry($data);
-        $record = $vinod404::get_entry($id);
+        $data->description_editor['text'] = 'Update Test Description';
+        \tool_vinod404\vinod404::update_entry($data);
+        $record = \tool_vinod404\vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
+        $this->assertEquals($data->description_editor['text'], $record->description);
     }
 
     /**
@@ -75,20 +89,26 @@ final class vinod404_test extends \advanced_testcase {
      * @covers \tool_vinod404\vinod404::delete_entry
      */
     public function test_delete_entry(): void {
-        global $DB;
         $this->resetAfterTest();
+        // Create a user and log them in.
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
         $course = $this->getDataGenerator()->create_course();
-        $vinod404 = new vinod404();
         $data = (object) [
             'name' => 'Test Entry',
             'courseid' => $course->id,
             'completed' => 0,
+            'description_editor' => [
+                'text' => 'Add Test Description',
+                'format' => FORMAT_HTML,
+                'itemid' => file_get_unused_draft_itemid()
+            ],
         ];
-        $id = $vinod404::add_entry($data);
-        $record = $vinod404::get_entry($id);
+        $id = \tool_vinod404\vinod404::add_entry($data);
+        $record = \tool_vinod404\vinod404::get_entry($id);
         $this->assertEquals($data->name, $record->name);
-        $vinod404::delete_entry($id);
-        $record = $vinod404::get_entry($id);
+        \tool_vinod404\vinod404::delete_entry($id);
+        $record = \tool_vinod404\vinod404::get_entry($id);
         $this->assertFalse($record);
     }
 }

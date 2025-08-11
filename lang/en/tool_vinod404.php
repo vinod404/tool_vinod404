@@ -32,6 +32,7 @@ $string['created'] = 'Created successfully';
 $string['delete'] = 'Delete';
 $string['deleteconfirm'] = 'Are you sure you want to delete this entry?';
 $string['deleted'] = 'Deleted successfully';
+$string['description'] = 'Description';
 $string['editform'] = 'Edit';
 $string['formheader'] = 'Form Header';
 $string['helloworld'] = 'Hello, World!';

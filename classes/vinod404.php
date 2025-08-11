@@ -39,7 +39,18 @@ class vinod404 {
         global $DB;
         $dataobject->timecreated = time();
         $dataobject->timemodified = time();
-        return $DB->insert_record(self::$table, $dataobject);
+        $dataobject->id = $DB->insert_record(self::$table, $dataobject);
+        $dataobject = file_postupdate_standard_editor(
+            $dataobject,
+            'description',
+            self::editor_options($dataobject->courseid),
+            \context_course::instance($dataobject->courseid),
+            'tool_vinod404',
+            'vinod',
+            $dataobject->id,
+        );
+        $DB->update_record(self::$table, $dataobject);
+        return $dataobject->id;
     }
 
     /**
@@ -50,6 +61,16 @@ class vinod404 {
     public static function update_entry($dataobject) {
         global $DB;
         $dataobject->timemodified = time();
+        $dataobject = file_postupdate_standard_editor(
+            $dataobject,
+            'description',
+            self::editor_options($dataobject->courseid),
+            \context_course::instance($dataobject->courseid),
+            'tool_vinod404',
+            'vinod',
+            $dataobject->id,
+        );
+
         return $DB->update_record(self::$table, $dataobject);
     }
 
@@ -71,5 +92,20 @@ class vinod404 {
     public static function get_entry($id) {
         global $DB;
         return $DB->get_record(self::$table, ['id' => $id]);
+    }
+
+    /**
+     * Summary of editor_options
+     * @param mixed $courseid
+     * @return array
+     */
+    public static function editor_options($courseid) {
+        return [
+            'trusttext' => true,
+            'subdirs' => true,
+            'maxfiles' => 0,
+            'maxbytes' => 0,
+            'context' => \context_course::instance($courseid),
+        ];
     }
 }

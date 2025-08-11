@@ -17,6 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->dirroot .'/admin/tool/vinod404/lib.php');
 /**
  * Class form
  *
@@ -31,6 +32,7 @@ class tool_vinod404_form extends \moodleform {
      */
     public function definition() {
         $mform = $this->_form;
+        $courseid = $this->_customdata['courseid'];
         $mform->addElement("header", "header", get_string("formheader", 'tool_vinod404'));
         $mform->addElement('text', 'name', get_string('name', 'tool_vinod404'));
         $mform->setType('name', PARAM_NOTAGS);
@@ -42,6 +44,11 @@ class tool_vinod404_form extends \moodleform {
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
+
+        $editor_options = tool_vinod404\vinod404::editor_options($courseid);
+
+        $mform->addElement('editor', 'description_editor', get_string('description', 'tool_vinod404'), $editor_options);
+        $mform->setType('description_editor', PARAM_RAW);
 
         $this->add_action_buttons();
     }

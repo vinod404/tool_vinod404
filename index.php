@@ -22,7 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use tool_vinod404;
 require_once(__DIR__ . '/../../../config.php');
 $courseid = required_param('courseid', PARAM_INT);
 $delete = optional_param('delete', 0, PARAM_INT);
