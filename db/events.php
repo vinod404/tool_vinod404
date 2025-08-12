@@ -15,17 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version file for plugin vinod404
+ * Event observers for Vinod Learning plugin
  *
- * @package   tool_vinod404
- * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tool_vinod404
+ * @category   event
+ * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025081200.02;
-$plugin->requires = 2020061525;
-$plugin->component = 'tool_vinod404';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.3';
+$observers = [
+    [
+        'eventname'   => '\core\event\course_deleted',
+        'callback'    => 'tool_vinod404\observer::course_deleted',
+    ],
+];

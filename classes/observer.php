@@ -14,18 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_vinod404;
+
 /**
- * Version file for plugin vinod404
+ * Class observer
  *
- * @package   tool_vinod404
- * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tool_vinod404
+ * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class observer {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 2025081200.02;
-$plugin->requires = 2020061525;
-$plugin->component = 'tool_vinod404';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.3';
+    /**
+     * Deletes the entries when a course is deleted.
+     *
+     * @param \core\event\course_deleted $event
+     */
+    public static function course_deleted(\core\event\course_deleted $event) {
+        global $DB;
+        $DB->delete_records('tool_vinod404', ['courseid' => $event->objectid]);
+    }
+}

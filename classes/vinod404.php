@@ -37,6 +37,7 @@ class vinod404 {
      */
     public static function add_entry($dataobject) {
         global $DB;
+        $context = \context_course::instance($dataobject->courseid);
         $dataobject->timecreated = time();
         $dataobject->timemodified = time();
         $dataobject->id = $DB->insert_record(self::$table, $dataobject);
@@ -50,6 +51,14 @@ class vinod404 {
             $dataobject->id,
         );
         $DB->update_record(self::$table, $dataobject);
+
+        // Trigger entry_created event.
+        $event = \tool_vinod404\event\entry_created::create([
+            'context' => $context,
+            'objectid' => $dataobject->id,
+        ]);
+        $event->trigger();
+
         return $dataobject->id;
     }
 
@@ -71,7 +80,15 @@ class vinod404 {
             $dataobject->id,
         );
 
-        return $DB->update_record(self::$table, $dataobject);
+        $id = $DB->update_record(self::$table, $dataobject);
+        // Trigger event.
+        $event = \tool_vinod404\event\entry_updated::create([
+            'context' => \context_course::instance($dataobject->courseid),
+            'objectid' => $dataobject->id,
+        ]);
+        $event->trigger();
+
+        return $id;
     }
 
     /**
@@ -81,7 +98,17 @@ class vinod404 {
      */
     public static function delete_entry($id) {
         global $DB;
-        return $DB->delete_records(self::$table, ['id' => $id]);
+        $data = self::get_entry($id);
+        $status = $DB->delete_records(self::$table, ['id' => $id]);
+
+        // Trigger event.
+        $event = \tool_vinod404\event\entry_deleted::create([
+            'context' => \context_course::instance($data->courseid),
+            'objectid' => $data->id,
+        ]);
+        $event->trigger();
+
+        return $status;
     }
 
     /**
