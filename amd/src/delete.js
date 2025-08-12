@@ -31,7 +31,7 @@ export const init = (selector) => {
     elements.forEach((element) => {
         element.addEventListener("click", (e) => {
             e.preventDefault();
-            const href = element.getAttribute("href");
+            const deleteurl = element.getAttribute("href");
             str.get_strings([
                 {'key': 'delete'},
                 {'key': 'deleteconfirm', component: 'tool_vinod404'},
@@ -39,7 +39,7 @@ export const init = (selector) => {
                 {'key': 'no'},
             ]).done(function(s) {
                 notification.confirm(s[0], s[1], s[2], s[3], function() {
-                    window.location.href = href;
+                    window.location.href = deleteurl;
                 });
             }).fail(notification.exception);
         });
