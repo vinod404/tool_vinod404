@@ -41,16 +41,18 @@ class vinod404 {
         $dataobject->timecreated = time();
         $dataobject->timemodified = time();
         $dataobject->id = $DB->insert_record(self::$table, $dataobject);
-        $dataobject = file_postupdate_standard_editor(
-            $dataobject,
-            'description',
-            self::editor_options($dataobject->courseid),
-            \context_course::instance($dataobject->courseid),
-            'tool_vinod404',
-            'vinod',
-            $dataobject->id,
-        );
-        $DB->update_record(self::$table, $dataobject);
+        if (isset($dataobject->description_editor)) {
+            $dataobject = file_postupdate_standard_editor(
+                $dataobject,
+                'description',
+                self::editor_options($dataobject->courseid),
+                \context_course::instance($dataobject->courseid),
+                'tool_vinod404',
+                'vinod',
+                $dataobject->id,
+            );
+            $DB->update_record(self::$table, $dataobject);
+        }
 
         // Trigger entry_created event.
         $event = \tool_vinod404\event\entry_created::create([

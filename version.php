@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025081300;
+$plugin->version = 2025081301;
 $plugin->requires = 2020061525;
 $plugin->component = 'tool_vinod404';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.5';
+$plugin->release = '2.6';
