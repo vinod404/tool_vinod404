@@ -25,6 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['addform'] = 'Add';
+$string['cachedef_vinod404'] = 'Vinod Learning Plugin Cache';
 $string['completed'] = 'Completed';
 $string['confirmdelete'] = 'Are you sure you want to delete this entry?';
 $string['courseid'] = 'Course ID';

@@ -15,17 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version file for plugin vinod404
+ * Cache definitions for Vinod Learning plugin
  *
- * @package   tool_vinod404
- * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Documentation: {@link https://docs.moodle.org/dev/Cache_API}
+ *
+ * @package    tool_vinod404
+ * @category   cache
+ * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025081302;
-$plugin->requires = 2020061525;
-$plugin->component = 'tool_vinod404';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.7';
+$definitions = [
+    'vinod404' => [
+        'mode' => core_cache\store::MODE_APPLICATION,
+    ],
+];

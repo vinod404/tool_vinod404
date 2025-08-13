@@ -16,6 +16,7 @@
 
 namespace tool_vinod404;
 
+use cache;
 /**
  * Class vinod404
  *
@@ -53,6 +54,8 @@ class vinod404 {
             );
             $DB->update_record(self::$table, $dataobject);
         }
+        $cache = cache::make('tool_vinod404', 'vinod404');
+        $cache->set($dataobject->id, $dataobject);
 
         // Trigger entry_created event.
         $event = \tool_vinod404\event\entry_created::create([
@@ -83,6 +86,8 @@ class vinod404 {
         );
 
         $id = $DB->update_record(self::$table, $dataobject);
+        $cache = cache::make('tool_vinod404', 'vinod404');
+        $cache->set($dataobject->id, $dataobject);
         // Trigger event.
         $event = \tool_vinod404\event\entry_updated::create([
             'context' => \context_course::instance($dataobject->courseid),
@@ -103,6 +108,8 @@ class vinod404 {
         $data = self::get_entry($id);
         $status = $DB->delete_records(self::$table, ['id' => $id]);
 
+        $cache = cache::make('tool_vinod404', 'vinod404');
+        $cache->delete($id);
         // Trigger event.
         $event = \tool_vinod404\event\entry_deleted::create([
             'context' => \context_course::instance($data->courseid),
@@ -120,7 +127,13 @@ class vinod404 {
      */
     public static function get_entry($id) {
         global $DB;
-        return $DB->get_record(self::$table, ['id' => $id]);
+        $cache = cache::make('tool_vinod404', 'vinod404');
+        if ($cache->has($id)) {
+            return $cache->get($id);
+        }
+        $entry = $DB->get_record(self::$table, ['id' => $id]);
+        $cache->set($id, $entry);
+        return $entry;
     }
 
     /**
