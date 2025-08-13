@@ -79,7 +79,8 @@ class external extends external_api {
     }
 
     /**
-     * Get all entries
+     * Get all entries for a course
+     * @param int $courseid The ID of the course to retrieve entries for
      * @return array
      */
     public static function get_entries($courseid): array {

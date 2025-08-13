@@ -46,10 +46,10 @@ export const init = (selector) => {
             ])
             .done(function(s) {
                 notification.confirm(
-                    s[0], // title
-                    s[1], // question
-                    s[2], // yes label
-                    s[3], // no label
+                    s[0], // Title
+                    s[1], // Question
+                    s[2], // Yes label
+                    s[3], // No label
                     function() {
                         // 1. Call WS to delete entry
                         ajax.call([{
