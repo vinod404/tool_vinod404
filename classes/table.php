@@ -133,9 +133,20 @@ class tool_vinod404_table extends table_sql {
 
             $url = new moodle_url('/admin/tool/vinod404/index.php',
                 ['delete' => $line->id, 'courseid' => $line->courseid, 'sesskey' => sesskey()]);
-            $action .= html_writer::link($url, get_string('delete'), ['class' => 'btn btn-danger', 'data-action' => 'delete']);
+            $action .= html_writer::link($url, get_string('delete'),
+            ['class' => 'btn btn-danger', 'data-action' => 'delete', 'data-id' => $line->id, 'data-course-id' => $line->courseid]);
             return $action;
         }
         return '-';
+    }
+
+    /**
+     * Summary of set_attribute
+     * @param mixed $attribute
+     * @param mixed $value
+     * @return void
+     */
+    public function set_attribute($attribute, $value) {
+        $this->attributes[$attribute] = $value;
     }
 }

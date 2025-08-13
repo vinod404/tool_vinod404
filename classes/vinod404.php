@@ -122,6 +122,17 @@ class vinod404 {
     }
 
     /**
+     * Get all entries for a specific course
+     *
+     * @param int $courseid
+     * @return array
+     */
+    public static function get_entries($courseid) {
+        global $DB;
+        return $DB->get_records(self::$table, ['courseid' => $courseid]);
+    }
+
+    /**
      * Summary of editor_options
      * @param mixed $courseid
      * @return array

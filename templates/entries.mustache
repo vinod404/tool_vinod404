@@ -28,13 +28,15 @@
     }
 }}
 
+<div class = "vinod404table">
 <h2>{{#str}} pluginname, tool_vinod404 {{/str}}</h2>
 <p>{{#str}} forcourse, tool_vinod404, {{coursename}} {{/str}}</p>
 {{#canadd}}
 <div> {{{ addlink }}} </div>
 {{/canadd}}
 {{{ table }}}
-
+</div>
+</div>
 {{#js}}
 require(['tool_vinod404/delete'], (vinod) => vinod.init('[data-action=delete]'));
 {{/js}}

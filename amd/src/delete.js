@@ -24,24 +24,63 @@
 
 import * as str from "core/str";
 import * as notification from 'core/notification';
+import * as templates from 'core/templates';
+import * as ajax from 'core/ajax';
 
 export const init = (selector) => {
-    var elements = document.querySelectorAll(selector);
+    const elements = document.querySelectorAll(selector);
 
     elements.forEach((element) => {
         element.addEventListener("click", (e) => {
             e.preventDefault();
-            const deleteurl = element.getAttribute("href");
+
+            const entryId = element.getAttribute("data-id");
+            const courseId = element.getAttribute("data-course-id");
+            const tableElement = element.closest(".vinod404table");
+
             str.get_strings([
-                {'key': 'delete'},
-                {'key': 'deleteconfirm', component: 'tool_vinod404'},
-                {'key': 'yes'},
-                {'key': 'no'},
-            ]).done(function(s) {
-                notification.confirm(s[0], s[1], s[2], s[3], function() {
-                    window.location.href = deleteurl;
-                });
-            }).fail(notification.exception);
+                {key: 'delete'},
+                {key: 'deleteconfirm', component: 'tool_vinod404'},
+                {key: 'yes'},
+                {key: 'no'},
+            ])
+            .done(function(s) {
+                notification.confirm(
+                    s[0], // title
+                    s[1], // question
+                    s[2], // yes label
+                    s[3], // no label
+                    function() {
+                        // 1. Call WS to delete entry
+                        ajax.call([{
+                            methodname: "tool_vinod404_delete_entry",
+                            args: {id: entryId}
+                        }])[0]
+                        .then(() => {
+                            // 2. Fetch updated templatable object
+                            return ajax.call([{
+                                methodname: "tool_vinod404_get_entries",
+                                args: {id: courseId}
+                            }])[0];
+                        })
+                        // eslint-disable-next-line promise/always-return
+                        .then((entryData) => {
+                            // 3. Render the template and update the DOM
+                            templates.render('tool_vinod404/entries', entryData)
+                                // eslint-disable-next-line max-nested-callbacks
+                                .done(function(html, js) {
+                                    templates.replaceNodeContents(tableElement, html, js);
+                                })
+                                .fail(notification.exception);
+                        })
+                        .catch(notification.exception);
+                    },
+                    function() {
+                        // No button clicked — do nothing
+                    }
+                );
+            })
+            .fail(notification.exception);
         });
     });
 };

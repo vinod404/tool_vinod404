@@ -55,7 +55,7 @@ class entries implements \renderable, \templatable {
      * @param \renderer_base $output
      * @return array
      */
-    public function export_for_template(\renderer_base $output) {
+    public function export_for_template(\renderer_base $output): array {
 
         $course = get_course($this->courseid);
         $context = \context_course::instance($this->courseid);
@@ -64,18 +64,19 @@ class entries implements \renderable, \templatable {
 
         ob_start();
         $table = new \tool_vinod404_table('vinod404table', $this->courseid);
+        $table->set_attribute('id', 'vinod404table');
         $table->define_baseurl($this->url);
         $table->out(0, true);
         $data->table = ob_get_clean();
 
         $data->canadd = false;
+        $data->addlink = '';
         if (has_capability('tool/vinod404:edit', $context)) {
             $data->canadd = true;
             $addurl = new \moodle_url('/admin/tool/vinod404/edit.php', ['courseid' => $this->courseid]);
             $addlink = \html_writer::link($addurl, get_string('addform', 'tool_vinod404'), []);
             $data->addlink = $addlink;
         }
-
         return (array) $data;
     }
 }
