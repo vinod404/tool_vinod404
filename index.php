@@ -23,6 +23,7 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
+
 $courseid = required_param('courseid', PARAM_INT);
 $delete = optional_param('delete', 0, PARAM_INT);
 $sesskey = optional_param('sesskey', '', PARAM_ALPHANUMEXT);
@@ -30,7 +31,9 @@ $sesskey = optional_param('sesskey', '', PARAM_ALPHANUMEXT);
 $url = new \moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 require_course_login($course);
-
+if (!$enable = get_config('tool_vinod404', 'enable')) {
+    redirect($url, get_string('plugin_disabled', 'tool_vinod404'));
+}
 $context = context_course::instance($course->id);
 require_capability('tool/vinod404:view', $context);
 

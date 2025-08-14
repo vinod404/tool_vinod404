@@ -30,7 +30,7 @@
  * @return void
  */
 function tool_vinod404_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
-    if (has_capability('tool/vinod404:view', $context)) {
+    if (get_config('tool_vinod404', 'enable') && has_capability('tool/vinod404:view', $context)) {
         $url = new moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $course->id]);
         $parentnode->add(
             get_string('pluginname', 'tool_vinod404'),

@@ -15,17 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version file for plugin vinod404
+ * TODO describe file settings
  *
- * @package   tool_vinod404
- * @copyright 2025, Vinod Kumar Aleti <vinod.aleti@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tool_vinod404
+ * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025081302.01;
-$plugin->requires = 2020061525;
-$plugin->component = 'tool_vinod404';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.7';
+if ($hassiteconfig) {
+    $settings = new admin_settingpage('tool_vinod404', get_string('pluginname', 'tool_vinod404'));
+    $ADMIN->add('tools', $settings);
+    $settings->add(new admin_setting_configcheckbox('tool_vinod404/enable',
+        get_string('enable_tool_vinod404', 'tool_vinod404'),
+        get_string('enable_tool_vinod404_desc', 'tool_vinod404'),
+        1));
+}

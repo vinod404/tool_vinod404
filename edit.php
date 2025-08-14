@@ -40,7 +40,10 @@ if ($id > 0) {
     $record->descriptionformat = FORMAT_HTML;
     $record->description = '';
 }
-
+$returnurl = new moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
+if (!$enable = get_config('tool_vinod404', 'enable')) {
+    redirect(new moodle_url('/course/view.php', ['id' => $courseid]), get_string('plugin_disabled', 'tool_vinod404'));
+}
 require_course_login($courseid);
 $context = context_course::instance($courseid);
 require_capability('tool/vinod404:edit', $context);
@@ -66,7 +69,7 @@ $record = file_prepare_standard_editor(
 );
 $form->set_data($record);
 
-$returnurl = new moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $courseid]);
+
 if ($form->is_cancelled()) {
     redirect($returnurl);
 } else if ($data = $form->get_data()) {
