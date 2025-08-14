@@ -32,7 +32,7 @@ $url = new \moodle_url('/admin/tool/vinod404/index.php', ['courseid' => $coursei
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 require_course_login($course);
 if (!$enable = get_config('tool_vinod404', 'enable')) {
-    redirect($url, get_string('plugin_disabled', 'tool_vinod404'));
+    redirect(new moodle_url('/course/view.php', ['id' => $courseid]), get_string('plugin_disabled', 'tool_vinod404'));
 }
 $context = context_course::instance($course->id);
 require_capability('tool/vinod404:view', $context);
