@@ -20,14 +20,13 @@ Feature: Teacher can manage Vinod404 entries
     And I am on "Course 1" course homepage
     And I navigate to "Vinod Learning plugin" in current page administration
 
-    Scenario: Create a new entry
-      Given I click on "Add" "link"
-      And I set the following fields to these values:
-        | Name        | Entry 1             |
-        | Completed   | 1                    |
-        | Description | This is a new entry  |
-        And I press "Save changes"
-       Then the following should exist in the "TABLE_ID" table:
-         | Name      | Entry 1             |
-         | Completed | Yes                  |
-         | Description | This is a new entry  |
+  Scenario: Create a new entry
+    Given I click on "Add" "link"
+    And I set the following fields to these values:
+    | Name        | Entry 1             |
+    | Completed   | 1                    |
+    | Description | This is a new entry  |
+    And I press "Save changes"
+    Then the following should exist in the "vinod404table" table:
+      | Name        | Completed   | Description               |
+      | Entry 1     | Yes         | This is a new entry       |
