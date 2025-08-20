@@ -30,7 +30,7 @@ class entry_deleted extends \core\event\base {
      */
     protected function init() {
         $this->data['objecttable'] = 'tool_vinod404';
-        $this->data['crud'] = 'c';
+        $this->data['crud'] = 'd';
         $this->data['edulevel'] = self::LEVEL_OTHER;
     }
 

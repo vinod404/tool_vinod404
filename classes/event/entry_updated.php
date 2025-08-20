@@ -32,7 +32,7 @@ class entry_updated extends \core\event\base {
      */
     protected function init() {
         $this->data['objecttable'] = 'tool_vinod404';
-        $this->data['crud'] = 'c';
+        $this->data['crud'] = 'u';
         $this->data['edulevel'] = self::LEVEL_OTHER;
     }
 

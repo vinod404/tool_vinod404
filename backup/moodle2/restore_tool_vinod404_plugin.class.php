@@ -18,7 +18,7 @@
  * TODO describe file restore_tool_vinod404_plugin.class
  *
  * @package    tool_vinod404
- * @copyright  2025 YOUR NAME <your@email.com>
+ * @copyright  2025 Aleti Vinod Kumar <vinod.aleti@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -30,26 +31,28 @@ import * as ajax from 'core/ajax';
 export const init = (selector) => {
     document.addEventListener('click', (e) => {
         const target = e.target.closest(selector);
+
         if (!target) {
-            return; // Ignore clicks outside our selector
+            return;
         }
+
         e.preventDefault();
 
-        const {id: entryId, courseId} = target.dataset;
+        const entryId = target.dataset.id;
+        const courseId = target.dataset.courseId;
         const tableElement = target.closest('.vinod404table');
-        // eslint-disable-next-line no-console
-        console.log(`entry id: ${entryId}`);
 
-        // eslint-disable-next-line promise/catch-or-return
+        if (!entryId || !courseId) {
+            console.error('Missing entryId or courseId in dataset', target);
+            return;
+        }
+
         str.get_strings([
             {key: 'delete'},
             {key: 'deleteconfirm', component: 'tool_vinod404'},
             {key: 'yes'},
-            {key: 'no'},
-        ])
-        // eslint-disable-next-line promise/always-return
-        .then(([deleteLabel, confirmMessage, yesLabel, noLabel]) => {
-            // eslint-disable-next-line promise/no-nesting
+            {key: 'no'}
+        ]).then(([deleteLabel, confirmMessage, yesLabel, noLabel]) => {
             return notification.confirm(
                 deleteLabel,
                 confirmMessage,
@@ -70,18 +73,19 @@ export const init = (selector) => {
                     }])[0])
 
                     // 3. Then render template
-                    .then((entryData) => templates.render('tool_vinod404/entries', entryData))
-
-                    // 4. Then replace DOM safely
-                    // eslint-disable-next-line promise/always-return
-                    .then(({html, js}) => {
-                        templates.replaceNodeContents(tableElement, html, js);
-                    })
-
+                    // eslint-disable-next-line promise/no-nesting
+                    .then((entryData) => templates.renderForPromise('tool_vinod404/entries', entryData)
+                        .then((result) => {
+                            const html = result.html || '';
+                            // eslint-disable-next-line promise/always-return
+                            const js = result.js || '';
+                            templates.replaceNodeContents(tableElement, html, js);
+                        })
+                    )
                     // Handle any error in the chain
                     .catch(notification.exception);
                 }
             );
-        });
+        }).catch(notification.exception);
     });
 };
