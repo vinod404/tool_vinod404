@@ -22,65 +22,66 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import * as str from "core/str";
+import * as str from 'core/str';
 import * as notification from 'core/notification';
 import * as templates from 'core/templates';
 import * as ajax from 'core/ajax';
 
 export const init = (selector) => {
-    const elements = document.querySelectorAll(selector);
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest(selector);
+        if (!target) {
+            return; // Ignore clicks outside our selector
+        }
+        e.preventDefault();
 
-    elements.forEach((element) => {
-        element.addEventListener("click", (e) => {
-            e.preventDefault();
+        const {id: entryId, courseId} = target.dataset;
+        const tableElement = target.closest('.vinod404table');
+        // eslint-disable-next-line no-console
+        console.log(`entry id: ${entryId}`);
 
-            const entryId = element.getAttribute("data-id");
-            const courseId = element.getAttribute("data-course-id");
-            const tableElement = element.closest(".vinod404table");
+        // eslint-disable-next-line promise/catch-or-return
+        str.get_strings([
+            {key: 'delete'},
+            {key: 'deleteconfirm', component: 'tool_vinod404'},
+            {key: 'yes'},
+            {key: 'no'},
+        ])
+        // eslint-disable-next-line promise/always-return
+        .then(([deleteLabel, confirmMessage, yesLabel, noLabel]) => {
+            // eslint-disable-next-line promise/no-nesting
+            return notification.confirm(
+                deleteLabel,
+                confirmMessage,
+                yesLabel,
+                noLabel,
+                () => {
+                    // 1. Delete entry
+                    // eslint-disable-next-line promise/no-nesting
+                    ajax.call([{
+                        methodname: "tool_vinod404_delete_entry",
+                        args: {id: entryId},
+                    }])[0]
 
-            str.get_strings([
-                {key: 'delete'},
-                {key: 'deleteconfirm', component: 'tool_vinod404'},
-                {key: 'yes'},
-                {key: 'no'},
-            ])
-            .done(function(s) {
-                notification.confirm(
-                    s[0], // Title
-                    s[1], // Question
-                    s[2], // Yes label
-                    s[3], // No label
-                    function() {
-                        // 1. Call WS to delete entry
-                        ajax.call([{
-                            methodname: "tool_vinod404_delete_entry",
-                            args: {id: entryId}
-                        }])[0]
-                        .then(() => {
-                            // 2. Fetch updated templatable object
-                            return ajax.call([{
-                                methodname: "tool_vinod404_get_entries",
-                                args: {id: courseId}
-                            }])[0];
-                        })
-                        // eslint-disable-next-line promise/always-return
-                        .then((entryData) => {
-                            // 3. Render the template and update the DOM
-                            templates.render('tool_vinod404/entries', entryData)
-                                // eslint-disable-next-line max-nested-callbacks
-                                .done(function(html, js) {
-                                    templates.replaceNodeContents(tableElement, html, js);
-                                })
-                                .fail(notification.exception);
-                        })
-                        .catch(notification.exception);
-                    },
-                    function() {
-                        // No button clicked — do nothing
-                    }
-                );
-            })
-            .fail(notification.exception);
+                    // 2. Then fetch updated entries
+                    .then(() => ajax.call([{
+                        methodname: "tool_vinod404_get_entries",
+                        args: {id: courseId},
+                    }])[0])
+
+                    // 3. Then render template
+                    .then((entryData) => templates.render('tool_vinod404/entries', entryData))
+
+                    // 4. Then replace DOM safely
+                    // eslint-disable-next-line promise/always-return
+                    .then(({html, js}) => {
+                        templates.replaceNodeContents(tableElement, html, js);
+                    })
+
+                    // Handle any error in the chain
+                    .catch(notification.exception);
+                }
+            );
         });
     });
 };

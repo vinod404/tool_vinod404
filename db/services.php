@@ -29,20 +29,16 @@ defined('MOODLE_INTERNAL') || die();
 
 $functions = [
     'tool_vinod404_delete_entry' => [
-        'classname'   => 'tool_vinod404\external',
-        'methodname'  => 'delete_entry',
+        'classname'   => 'tool_vinod404\external\delete_entry',
         'description' => 'Delete a specific entry',
         'type'        => 'write',
-        'classpath'  => 'tool/vinod404/classes/external.php',
         'capabilities' => 'tool/vinod404:edit',
         'ajax'        => true,
     ],
     'tool_vinod404_get_entries' => [
-        'classname'   => 'tool_vinod404\external',
-        'methodname'  => 'get_entries',
+        'classname'   => 'tool_vinod404\external\get_entries',
         'description' => 'Get all entries',
         'type'        => 'read',
-        'classpath'  => 'tool/vinod404/classes/external.php',
         'capabilities' => 'tool/vinod404:view',
         'ajax'        => true,
     ],
