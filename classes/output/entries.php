@@ -64,7 +64,7 @@ class entries implements \renderable, \templatable {
 
         ob_start();
         $table = new \tool_vinod404_table('vinod404table', $this->courseid);
-        $table->set_attribute('id', 'vinod404table');
+        $table->set_attribute('id', 'vinod404table_overview');
         $table->define_baseurl($this->url);
         $table->out(0, true);
         $data->table = ob_get_clean();

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * JS module to delete entries from tool_vinod404.
  *
@@ -28,7 +27,13 @@ import * as notification from 'core/notification';
 import * as templates from 'core/templates';
 import * as ajax from 'core/ajax';
 
+let initialized = false;
+
 export const init = (selector) => {
+    if (initialized) {
+        return; // Already bound, no need to reattach
+    }
+    initialized = true;
     document.addEventListener('click', (e) => {
         const target = e.target.closest(selector);
 
@@ -40,7 +45,7 @@ export const init = (selector) => {
 
         const entryId = target.dataset.id;
         const courseId = target.dataset.courseId;
-        const tableElement = target.closest('.vinod404table');
+        const tableElement = target.closest(".vinod404table");
 
         if (!entryId || !courseId) {
             console.error('Missing entryId or courseId in dataset', target);
@@ -76,6 +81,7 @@ export const init = (selector) => {
                     // eslint-disable-next-line promise/no-nesting
                     .then((entryData) => templates.renderForPromise('tool_vinod404/entries', entryData)
                         .then((result) => {
+                            console.log(result);
                             const html = result.html || '';
                             // eslint-disable-next-line promise/always-return
                             const js = result.js || '';

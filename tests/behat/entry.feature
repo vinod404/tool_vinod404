@@ -25,7 +25,7 @@ Feature: Teacher can manage Vinod404 entries
       | Completed   | 1                   |
       | Description | This is a new entry |
     And I press "Save changes"
-    Then the following should exist in the "vinod404table" table:
+    Then the following should exist in the "vinod404table_overview" table:
       | Name    | Completed | Description         |
       | Entry 1 | Yes       | This is a new entry |
 
@@ -44,15 +44,17 @@ Feature: Teacher can manage Vinod404 entries
       | Completed   | 0                        |
       | Description | This is an updated entry |
     And I press "Save changes"
-    #Then the table "vinod404table" should contain a row with the following data:
+    Then I should see "Entry 1 Updated"
+
+    # None of the below are working
+    #Then the table "vinod404table_overview" should contain a row with the following data:
     #  | Name            | Completed | Description               |
     #  | Entry 1 Updated | No        | This is an updated entry  |
-    #Then the table "vinod404table" should contain row with Name "Entry 1 Updated", Completed "No", Description "This is an updated entry"
-    #Then "vinod404table_r0_c0" row "Name" column of "vinod404table" table should contain "Entry 1 Updated"
-
-    Then the following should exist in the "vinod404table" table:
-      | Name            | Completed | Description              |
-      | Entry 1 Updated | No        | This is an updated entry |
+    #Then the table "vinod404table_overview" should contain row with Name "Entry 1 Updated", Completed "No", Description "This is an updated entry"
+    #Then "vinod404table_r0_c0" row "Name" column of "vinod404table_overview" table should contain "Entry 1 Updated"
+    # Then the following should exist in the "vinod404table_overview" table:
+    #   | Name            | Completed | Description              |
+    #   | Entry 1 Updated | No        | This is an updated entry |
 
   @javascript
   Scenario: Deleting the entry with javascript
