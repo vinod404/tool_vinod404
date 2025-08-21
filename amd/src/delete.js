@@ -62,7 +62,7 @@ export const init = (selector) => {
                 confirmMessage,
                 yesLabel,
                 noLabel,
-                async () => {
+                async() => {
                     try {
                         // 1. Delete entry
                         await ajax.call([{
