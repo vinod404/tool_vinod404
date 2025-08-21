@@ -40,7 +40,7 @@ require_capability('tool/vinod404:view', $context);
 $PAGE->set_context($context);
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('incourse');
-$PAGE->set_title(get_string('vinod404', 'tool_vinod404'));
+$PAGE->set_title(get_string('pluginname', 'tool_vinod404'));
 $PAGE->set_heading(get_string('pluginname', 'tool_vinod404'));
 $PAGE->navbar->add(get_string('pluginname', 'tool_vinod404'), $url);
 

@@ -24,10 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['addform'] = 'Add';
+$string['addform'] = 'Add Entry';
 $string['cachedef_vinod404'] = 'Vinod Learning Plugin Cache';
 $string['completed'] = 'Completed';
-$string['confirmdelete'] = 'Are you sure you want to delete this entry?';
 $string['courseid'] = 'Course ID';
 $string['coursename'] = 'Course Name: {$a}';
 $string['created'] = 'Created successfully';
@@ -35,9 +34,9 @@ $string['delete'] = 'Delete';
 $string['deleteconfirm'] = 'Are you sure you want to delete this entry?';
 $string['deleted'] = 'Deleted successfully';
 $string['description'] = 'Description';
-$string['editform'] = 'Edit';
-$string['enable_tool_vinod404'] = 'Enable Vinod404 Plugin';
-$string['enable_tool_vinod404_desc'] = 'Check here to enable the Vinod Learning Plugin for this course.';
+$string['editform'] = 'Edit Entry';
+$string['enable_tool_vinod404'] = 'Enable Vinod Learning Plugin';
+$string['enable_tool_vinod404_desc'] = 'Enable the Vinod Learning Plugin';
 $string['entry_created'] = 'Entry created';
 $string['entry_deleted'] = 'Entry deleted';
 $string['entry_updated'] = 'Entry updated';
@@ -46,7 +45,6 @@ $string['event_entry_deleted'] = 'The user with id {$a->userid} deleted an entry
 $string['event_entry_updated'] = 'The user with id {$a->userid} updated an entry with id {$a->entryid} in course with id {$a->courseid}.';
 $string['forcourse'] = 'For course - {$a}';
 $string['formheader'] = 'Form Header';
-$string['helloworld'] = 'Hello, World!';
 $string['name'] = 'Name';
 $string['nameduplicate'] = 'Name already exists. Please enter a different name.';
 $string['plugin_disabled'] = 'Vinod Learning Plugin has been disabled.';
@@ -55,6 +53,5 @@ $string['priority'] = 'Priority';
 $string['timecreated'] = 'Time Created';
 $string['timemodified'] = 'Time Modified';
 $string['updated'] = 'Updated successfully';
-$string['vinod404'] = 'Vinod Learning Plugin';
 $string['vinod404:edit'] = 'Edit Vinod Learning Plugin';
 $string['vinod404:view'] = 'View Vinod Learning Plugin';
