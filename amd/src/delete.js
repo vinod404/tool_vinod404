@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -48,7 +47,7 @@ export const init = (selector) => {
         const tableElement = target.closest(".vinod404table");
 
         if (!entryId || !courseId) {
-            console.error('Missing entryId or courseId in dataset', target);
+            notification.alert('Error', 'Missing entryId or courseId in dataset', target.outerHTML || '');
             return;
         }
 
@@ -63,33 +62,28 @@ export const init = (selector) => {
                 confirmMessage,
                 yesLabel,
                 noLabel,
-                () => {
-                    // 1. Delete entry
-                    // eslint-disable-next-line promise/no-nesting
-                    ajax.call([{
-                        methodname: "tool_vinod404_delete_entry",
-                        args: {id: entryId},
-                    }])[0]
+                async () => {
+                    try {
+                        // 1. Delete entry
+                        await ajax.call([{
+                            methodname: "tool_vinod404_delete_entry",
+                            args: {id: entryId},
+                        }])[0];
 
-                    // 2. Then fetch updated entries
-                    .then(() => ajax.call([{
-                        methodname: "tool_vinod404_get_entries",
-                        args: {id: courseId},
-                    }])[0])
+                        // 2. Fetch updated entries
+                        const entryData = await ajax.call([{
+                            methodname: "tool_vinod404_get_entries",
+                            args: {id: courseId},
+                        }])[0];
 
-                    // 3. Then render template
-                    // eslint-disable-next-line promise/no-nesting
-                    .then((entryData) => templates.renderForPromise('tool_vinod404/entries', entryData)
-                        .then((result) => {
-                            console.log(result);
-                            const html = result.html || '';
-                            // eslint-disable-next-line promise/always-return
-                            const js = result.js || '';
-                            templates.replaceNodeContents(tableElement, html, js);
-                        })
-                    )
-                    // Handle any error in the chain
-                    .catch(notification.exception);
+                        // 3. Render template
+                        const result = await templates.renderForPromise('tool_vinod404/entries', entryData);
+                        const html = result.html || '';
+                        const js = result.js || '';
+                        templates.replaceNodeContents(tableElement, html, js);
+                    } catch (error) {
+                        notification.exception(error);
+                    }
                 }
             );
         }).catch(notification.exception);
