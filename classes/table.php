@@ -129,12 +129,12 @@ class tool_vinod404_table extends table_sql {
     protected function col_action($line) {
         if (has_capability('tool/vinod404:edit', context_course::instance($line->courseid))) {
             $url = new moodle_url('/admin/tool/vinod404/edit.php', ['id' => $line->id, 'courseid' => $line->courseid]);
-            $action = html_writer::link($url, get_string('edit'), ['class' => 'btn btn-secondary']);
-
+            $action = html_writer::link($url, get_string('edit'),
+                ['class' => 'btn btn-secondary']);
             $url = new moodle_url('/admin/tool/vinod404/index.php',
                 ['delete' => $line->id, 'courseid' => $line->courseid, 'sesskey' => sesskey()]);
             $action .= html_writer::link($url, get_string('delete'),
-            ['class' => 'btn btn-danger', 'data-action' => 'delete', 'data-id' => $line->id, 'data-course-id' => $line->courseid]);
+                ['class' => 'btn btn-danger', 'data-action' => 'delete', 'data-id' => $line->id, 'data-course-id' => $line->courseid]);
             return $action;
         }
         return '-';
