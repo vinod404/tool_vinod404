@@ -46,16 +46,6 @@ Feature: Teacher can manage Vinod404 entries
     And I press "Save changes"
     Then I should see "Entry 1 Updated"
 
-    # None of the below are working
-    #Then the table "vinod404table_overview" should contain a row with the following data:
-    #  | Name            | Completed | Description               |
-    #  | Entry 1 Updated | No        | This is an updated entry  |
-    #Then the table "vinod404table_overview" should contain row with Name "Entry 1 Updated", Completed "No", Description "This is an updated entry"
-    #Then "vinod404table_r0_c0" row "Name" column of "vinod404table_overview" table should contain "Entry 1 Updated"
-    # Then the following should exist in the "vinod404table_overview" table:
-    #   | Name            | Completed | Description              |
-    #   | Entry 1 Updated | No        | This is an updated entry |
-
   @javascript
   Scenario: Deleting the entry with javascript
     Given I am on "Course 1" course homepage
