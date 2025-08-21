@@ -133,8 +133,12 @@ class tool_vinod404_table extends table_sql {
                 ['class' => 'btn btn-secondary']);
             $url = new moodle_url('/admin/tool/vinod404/index.php',
                 ['delete' => $line->id, 'courseid' => $line->courseid, 'sesskey' => sesskey()]);
-            $action .= html_writer::link($url, get_string('delete'),
-                ['class' => 'btn btn-danger', 'data-action' => 'delete', 'data-id' => $line->id, 'data-course-id' => $line->courseid]);
+            $action .= html_writer::link($url, get_string('delete'), [
+                'class' => 'btn btn-danger',
+                'data-action' => 'delete',
+                'data-id' => $line->id,
+                'data-course-id' => $line->courseid,
+            ]);
             return $action;
         }
         return '-';
